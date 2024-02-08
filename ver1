@@ -1,0 +1,15 @@
+import os
+import sys
+import requests
+
+# 133.795393,-25.694776
+coords = input()
+map_request = f"http://static-maps.yandex.ru/1.x/?ll={coords}&spn=30,30&l=sat"
+response = requests.get(map_request)
+if not response:
+    sys.exit(1)
+map_file = "map.png"
+with open(map_file, "wb") as file:
+    file.write(response.content)
+# Загружаем картинку
+os.remove(map_file)
